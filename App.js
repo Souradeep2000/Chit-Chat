@@ -10,10 +10,12 @@ import AddChatScreen from "./screens/AddChatScreen";
 import ChatScreen from "./screens/ChatScreen";
 import { LogBox } from "react-native";
 import { Platform } from "react-native";
+import { createDrawerNavigator } from "@react-navigation/drawer";
 
 if (Platform.OS === "android") LogBox.ignoreLogs(["Setting a timer"]);
 
-const Stack = createStackNavigator();
+const HomeStack = createStackNavigator();
+const Drawer = createDrawerNavigator();
 
 const globalScreenOptions = {
   headerStyle: { backgroundColor: "#ffc629" },
@@ -22,19 +24,24 @@ const globalScreenOptions = {
   headerTitleAlign: "center",
 };
 
+const HomeStackScreen = ({ navigation }) => {
+  return (
+    <HomeStack.Navigator screenOptions={globalScreenOptions}>
+      <HomeStack.Screen name="Home" component={HomeScreen} />
+      <HomeStack.Screen name="Chat" component={ChatScreen} />
+      <HomeStack.Screen name="Login" component={LoginScreen} />
+      <HomeStack.Screen name="Register" component={RegisterScreen} />
+      <HomeStack.Screen name="NewChat" component={AddChatScreen} />
+    </HomeStack.Navigator>
+  );
+};
+
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator
-        // initialRouteName="Home"
-        screenOptions={globalScreenOptions}
-      >
-        <Stack.Screen name="Login" component={LoginScreen} />
-        <Stack.Screen name="Register" component={RegisterScreen} />
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="NewChat" component={AddChatScreen} />
-        <Stack.Screen name="Chat" component={ChatScreen} />
-      </Stack.Navigator>
+      <Drawer.Navigator screenOptions={{ headerShown: false }}>
+        <Drawer.Screen name="HomeDrawer" component={HomeStackScreen} />
+      </Drawer.Navigator>
     </NavigationContainer>
   );
 }

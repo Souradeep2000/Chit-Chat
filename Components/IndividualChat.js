@@ -18,12 +18,7 @@ const IndividualChat = ({ id, chatName, enterChat }) => {
     return unsubscribe;
   });
   return (
-    <ListItem
-      key={id}
-      onPress={() => enterChat(id, chatName)}
-      key={id}
-      bottomDivider
-    >
+    <ListItem key={id} onPress={() => enterChat(id, chatName)} bottomDivider>
       {chatMessages?.[0]?.photoURL ? (
         <Avatar rounded source={{ uri: chatMessages?.[0]?.photoURL }} />
       ) : (

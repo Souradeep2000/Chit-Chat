@@ -41,7 +41,18 @@ const HomeScreen = ({ navigation }) => {
       headerTitleStyle: { color: "black" },
       headerTintColor: "black",
       headerLeft: () => (
-        <View style={{ marginLeft: 20 }}>
+        <View
+          style={{
+            marginLeft: 10,
+            flexDirection: "row",
+            alignItems: "center",
+            //justifyContent: "space-between",
+            width: 57,
+          }}
+        >
+          <TouchableOpacity onPress={() => navigation.openDrawer()}>
+            <AntDesign name="menufold" size={24} color="black" />
+          </TouchableOpacity>
           <TouchableOpacity onPress={signOutUser}>
             <Avatar
               rounded
@@ -55,6 +66,7 @@ const HomeScreen = ({ navigation }) => {
         <View
           style={{
             flexDirection: "row",
+            alignItems: "center",
             justifyContent: "space-between",
             width: 57,
             marginRight: 15,

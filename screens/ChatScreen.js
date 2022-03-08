@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -28,25 +28,25 @@ const ChatScreen = ({ navigation, route }) => {
   const [popup, setPopup] = useState(false);
 
   const [input, setInput] = useState("");
+  const clearInput = useRef();
+
+  const scrollViewRef = useRef();
 
   const [messages, setMessages] = useState([]);
 
   const sendMessage = () => {
     if (input === "") return;
     //Keyboard.dismiss();
-    db.collection("chats")
-      .doc(route.params.id)
-      .collection("messages")
-      .add({
-        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-        message: input,
-        displayName: auth.currentUser.displayName,
-        email: auth.currentUser.email,
-        photoURL: auth.currentUser.photoURL,
-      })
-      .then(() => {
-        setInput("");
-      });
+    db.collection("chats").doc(route.params.id).collection("messages").add({
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+      message: input,
+      displayName: auth.currentUser.displayName,
+      email: auth.currentUser.email,
+      photoURL: auth.currentUser.photoURL,
+    });
+
+    clearInput.current.clear();
+    setInput("");
   };
 
   useLayoutEffect(() => {
@@ -106,7 +106,7 @@ const ChatScreen = ({ navigation, route }) => {
       .collection("chats")
       .doc(route.params.id)
       .collection("messages")
-      .orderBy("timestamp", "desc")
+      .orderBy("timestamp")
       .onSnapshot((snapshot) =>
         setMessages(
           snapshot.docs.map((doc) => ({
@@ -162,7 +162,14 @@ const ChatScreen = ({ navigation, route }) => {
         keyboardVerticalOffset={85}
       >
         <>
-          <ScrollView contentContainerStyle={{ padding: 5 }}>
+          <ScrollView
+            ref={scrollViewRef}
+            onContentSizeChange={() =>
+              scrollViewRef.current.scrollToEnd({ animated: true })
+            }
+            invertStickyHeaders={true}
+            contentContainerStyle={{ padding: 5 }}
+          >
             {messages.map(({ id, data }) =>
               data.email === auth.currentUser.email ? (
                 <View key={id} style={styles.reciever}>
@@ -207,6 +214,7 @@ const ChatScreen = ({ navigation, route }) => {
             <TextInput
               value={input}
               placeholder="Message"
+              ref={clearInput}
               multiline
               style={styles.textInput}
               onSubmitEditing={sendMessage}
