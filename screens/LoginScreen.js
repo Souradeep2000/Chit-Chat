@@ -9,6 +9,7 @@ const LoginScreen = ({ navigation }) => {
   const [password, setPassword] = useState("");
 
   useEffect(() => {
+    //let isValid = true;
     const unsubscribe = auth.onAuthStateChanged((authUser) => {
       //console.log(authUser);
 
@@ -17,7 +18,9 @@ const LoginScreen = ({ navigation }) => {
       }
     });
 
-    return unsubscribe;
+    return () => {
+      unsubscribe;
+    };
   }, []);
 
   const signIn = () => {
@@ -55,14 +58,7 @@ const LoginScreen = ({ navigation }) => {
         />
       </View>
 
-      <Button
-        containerStyle={styles.button}
-        onPress={signIn}
-        title="Login"
-        // buttonStyle={{
-        //   backgroundColor: "#ffc629",
-        // }}
-      />
+      <Button containerStyle={styles.button} onPress={signIn} title="Login" />
       <Button
         containerStyle={styles.button}
         type={"outline"}
