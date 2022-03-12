@@ -27,12 +27,15 @@
     "react-native-elements": "^3.4.2",
     "react-native-fs": "^2.18.0",
     "react-native-gesture-handler": "~1.10.2",
+    "react-native-image-crop-picker": "^0.37.3",
     "react-native-pager-view": "5.0.12",
     "react-native-reanimated": "~2.2.0",
+    "react-native-redash": "^16.2.3",
     "react-native-safe-area-context": "3.2.0",
     "react-native-screens": "~3.4.0",
     "react-native-tab-view": "^3.1.1",
-    "react-native-web": "^0.17.1"
+    "react-native-web": "^0.17.1",
+    "reanimated-bottom-sheet": "^1.0.0-alpha.22"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0"

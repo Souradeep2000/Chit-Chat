@@ -16,6 +16,7 @@ import SettingsScreen from "./screens/SettingsScreen";
 import CustomDrawer from "./screens/CustomDrawer";
 import { AntDesign, Feather } from "@expo/vector-icons";
 import MyTabs from "./Components/MyTabs";
+import ProfileScreen from "./screens/ProfileScreen";
 
 if (Platform.OS === "android") LogBox.ignoreLogs(["Setting a timer"]);
 
@@ -97,6 +98,7 @@ export default function App() {
         <HomeStack.Screen name="Chat" component={ChatScreen} />
         <HomeStack.Screen name="Register" component={RegisterScreen} />
         <HomeStack.Screen name="NewChat" component={AddChatScreen} />
+        <HomeStack.Screen name="Profile" component={ProfileScreen} />
       </HomeStack.Navigator>
     </NavigationContainer>
   );

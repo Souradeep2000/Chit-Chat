@@ -18,6 +18,7 @@ import { auth } from "../firebase";
 
 const CustomDrawer = (props) => {
   let path = auth?.currentUser?.photoURL;
+  const name = auth?.currentUser?.displayName;
 
   const signOutUser = () => {
     if (Platform.OS == "web") {
@@ -54,21 +55,27 @@ const CustomDrawer = (props) => {
           }}
           source={require("../Image/background.png")}
         >
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              props.navigation.navigate("Profile");
+            }}
+          >
             <View style={{ alignItems: "center" }}>
               <Avatar
                 rounded
                 size={100}
                 source={path ? { uri: path } : require("../Image/fake_img.jpg")}
+                referrerPolicy="no-referrer"
               />
             </View>
             <Text
               style={{
                 color: "#fff",
                 fontSize: 18,
+                textAlign: "center",
               }}
             >
-              Souradeep
+              {name ? name : "You don't have a nick name!"}
             </Text>
           </TouchableOpacity>
         </ImageBackground>
