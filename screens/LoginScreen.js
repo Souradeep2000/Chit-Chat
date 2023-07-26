@@ -42,14 +42,14 @@ const LoginScreen = ({ navigation }) => {
       />
       <View style={styles.inputContainer}>
         <Input
-          placeholder="Email"
+          placeholder="admin@gmail.com"
           autoFocus
           type="email"
           value={email}
           onChangeText={(text) => setEmail(text)}
         />
         <Input
-          placeholder="Password"
+          placeholder="12345678"
           secureTextEntry
           type="password"
           value={password}

@@ -1,13 +1,14 @@
 {
-  "main": "node_modules/expo/AppEntry.js",
   "scripts": {
-    "start": "expo start",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
+    "start": "expo start --dev-client",
+    "build": "babel src -d lib",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
     "web": "expo start --web",
     "eject": "expo eject"
   },
   "dependencies": {
+    "@babel/plugin-proposal-export-namespace-from": "^7.18.9",
     "@expo/vector-icons": "^12.0.5",
     "@react-native-community/masked-view": "0.1.10",
     "@react-native-firebase/app": "^14.5.1",
@@ -18,6 +19,7 @@
     "@react-navigation/native-stack": "^6.1.0",
     "@react-navigation/stack": "^6.0.7",
     "browserslist": "^4.20.0",
+    "build": "^0.1.4",
     "expo": "~42.0.1",
     "expo-cli": "^5.3.0",
     "expo-image-picker": "~10.2.2",
@@ -25,7 +27,7 @@
     "firebase": "8.2.3",
     "react": "16.13.1",
     "react-dom": "16.13.1",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-42.0.0.tar.gz",
+    "react-native": "~0.63.4",
     "react-native-dotenv": "^3.2.0",
     "react-native-elements": "^3.4.2",
     "react-native-fs": "^2.18.0",
@@ -37,10 +39,15 @@
     "react-native-screens": "~3.4.0",
     "react-native-tab-view": "^3.1.1",
     "react-native-web": "^0.17.1",
-    "reanimated-bottom-sheet": "^1.0.0-alpha.22"
+    "reanimated-bottom-sheet": "^1.0.0-alpha.22",
+    "expo-splash-screen": "~0.11.2",
+    "expo-updates": "~0.8.1",
+    "react-native-unimodules": "0.14.10"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0"
   },
-  "private": true
+  "private": true,
+  "name": "chit-chat-app",
+  "version": "1.0.0"
 }
