@@ -8,7 +8,6 @@ const HomeScreen = ({ navigation }) => {
   const [chats, setChats] = useState([]);
 
   useEffect(() => {
-    let abortController = new AbortController();
     const unsubscribe = db.collection("chats").onSnapshot((snapshot) =>
       setChats(
         snapshot.docs.map((doc) => ({
@@ -17,10 +16,7 @@ const HomeScreen = ({ navigation }) => {
         }))
       )
     );
-    return () => {
-      abortController.abort();
-      unsubscribe;
-    };
+    return unsubscribe;
   }, []);
 
   const enterIntoChat = (id, chatName) => {
